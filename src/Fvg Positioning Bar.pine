@@ -189,6 +189,21 @@ indicator("FVG Position Bar[@Ultr]", shorttitle = "Fvg Bar[@Ultr]", overlay = tr
 	//  coloTertiaryDark30 	= input.color(hsla(202, 76%, 4%, 1.0))
 	//  coloTertiaryDark40 	= input.color(hsla(202, 76%, 0%, 1.0))
 
+//  ═══  Visa  ═══
+	// color colorBrandPrimary			= input.color(#1434CB)
+	// color colorBrandPrimaryLight		= input.color(#3B57DE)
+	// color colorBrandPrimaryDark		= input.color(#021E4C)
+	// color colorBrandSecondary		= input.color(#FCC015)
+	// color colorBrandSecondaryLight	= input.color(#FFD700)
+	// color colorBrandSecondaryDark	= input.color(#F7B600)
+	// color colorBrandTertiary7		= input.color(#2C2C2C)
+	// color colorBrandTertiary6		= input.color(#5C5C5C)
+	// color colorBrandTertiary5		= input.color(#979797)
+	// color colorBrandTertiary4		= input.color(#B9B9B9)
+	// color colorBrandTertiary3		= input.color(#DEDEDE)
+	// color colorBrandTertiary2		= input.color(#EEEEEE)
+	// color colorBrandTertiary1		= input.color(#F7F7F7)
+
 //  ═══  Latam  ═══
 	//  colorRedBackground			= input.color(rgb(232, 17, 75))	//Rojo Latam
 
@@ -232,7 +247,7 @@ indicator("FVG Position Bar[@Ultr]", shorttitle = "Fvg Bar[@Ultr]", overlay = tr
     // color colorLightGray				= input.color(#787B86)					// Gray
 
 //  ═══  Basic  ═══
-var grpColor = " ═══ Colores ═══ "
+//  var grpColor = " ═══ Colores ═══ "
 color colorBlueSky10				= #59F2E9                   //
 color colorBlueSky20				= #39F0EA                   //
 color colorBlueSky30				= #01EBF9                   // EEG Light Blue
@@ -244,6 +259,7 @@ color colorMenta30					= #7FFFD4                   //
 color colorMenta40					= #73FFCA                   //
 color colorLightMenta50				= #00ffd5                   // Menta
 color colorBlue50					= #0034c5                   // Blue Light
+color colorBrandPrimary				= #1434CB
 color colorLightGreen50				= #33ffac                   // Green Light
 color colorLightYellow20			= #FDF43C                   // Yellow Bright Line
 color colorLightYellow30			= #FEF301                   // Yellow Bright Line Light
@@ -267,9 +283,9 @@ color colorWebBackground			= #f3f2fa
 color colorLyla						= #7E57C2					// Lila
 color colorLightGray				= #787B86					// Gray
 
-
-colorLong =  input.color(colorBlueSky30, title = "Bullish Color", group = "Style")
-ColorShort = input.color(colorGlobal5ed9920, title = "Bearish Color", group = "Style")
+var grpColor	= " ═══ Colores ═══ "
+colorLong =  input.color(color.new(colorBlue50, 50), title = "Compra", group = grpColor, inline = 1)
+colorShort = input.color(color.new(colorLightYellow20, 50), title = "Venta", group = grpColor, inline = 1)
 invis = color.rgb(0,0,0,100)
 
 //  ═════════════════
@@ -282,7 +298,7 @@ levelRange    = input.int    (20, 'Level Range')
 levelTrend    = input.int    (35, 'Level Trend')
 
 
-var grpVar	= " ═══ Colores ═══ "
+var grpVar	= " ═══ Fvg ═══ "
 lb			= input.int(50,		title = "FVG Lookback",		group = grpVar)
 lbType		= input.bool(true,	title = "Fvg",	group = grpVar)
 atrMulti	= input.float(0.25,	title = "ATR Multiplier",	group = grpVar, step  = 0.25)
@@ -314,14 +330,14 @@ var downAry	= array.new_box(na)
 if fvgUp
     upAry.push(
       box.new(bar_index[2], low, bar_index, high[2]
-      , border_color	= color.new(colorLong, 50)
-      , bgcolor			= color.new(colorLong, 50)))
+      , border_color	= colorLong
+      , bgcolor			= colorLong))
 
 if fvgDown
     downAry.push(
       box.new(bar_index[2],  low[2], bar_index, high
-      , border_color	= color.new(ColorShort, 50)
-      , bgcolor			= color.new(ColorShort, 50)))
+      , border_color	= colorShort
+      , bgcolor			= colorShort))
 
 //  ═══  Arrays size  ═══
 if lbType == true
