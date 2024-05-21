@@ -23,16 +23,16 @@
 #### Secciones
 
 -  Variables
-  > Colors
-  > Constants
+-  Colors
+-  Constants
 
 -  Functions
-  > Maths
-  > Rules
+-  Maths
+-  Rules
 
 -  Display
-  > Plot
-  > Bar
+-  Plot
+-  Bar
 
 #### Contribuciones 
 
