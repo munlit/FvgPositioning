@@ -207,6 +207,16 @@ indicator("FVG Position Bar[@Ultr]", shorttitle = "Fvg Bar[@Ultr]", overlay = tr
 //  ═══  Latam  ═══
 	//  colorRedBackground			= input.color(rgb(232, 17, 75))	//Rojo Latam
 
+//  ═══  Arbe Robotics  ═══
+	// color colorArbePrimary			= input.color(#0035FF)
+	// color colorArbePrimaryLight		= input.color(#0640FF)
+	// color colorArbeSecondary			= input.color(#04ebff)
+
+//  ═══  AutoX  ═══
+	// color colorAutoXPrimary			= input.color(#2253F0)
+	// color colorAutoXPrimaryLight		= input.color(#0050F9)
+	// color colorAutoXSecondary		= input.color(#75ebc0)
+
 //  ═══  Basic  ═══
     // var grpColor = " ═══ Colores ═══ "
     // color colorBlueSky10				= input.color(#59F2E9)                   //
