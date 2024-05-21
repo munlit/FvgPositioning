@@ -284,8 +284,8 @@ color colorLyla						= #7E57C2					// Lila
 color colorLightGray				= #787B86					// Gray
 
 var grpColor	= " ═══ Colores ═══ "
-colorLong =  input.color(color.new(colorBlue50, 50), title = "Compra", group = grpColor, inline = 1)
-colorShort = input.color(color.new(colorLightYellow20, 50), title = "Venta", group = grpColor, inline = 1)
+colorLong =  input.color(color.new(colorBlue50, 50), title = "Compra", group = grpColor, inline = "aa")
+colorShort = input.color(color.new(colorLightYellow20, 50), title = "Venta", group = grpColor, inline = "aa")
 invis = color.rgb(0,0,0,100)
 
 //  ═════════════════
@@ -297,10 +297,8 @@ diLength      = input.int    (14, 'DI Length')
 levelRange    = input.int    (20, 'Level Range')
 levelTrend    = input.int    (35, 'Level Trend')
 
-
 var grpVar	= " ═══ Fvg ═══ "
 lb			= input.int(50,		title = "FVG Lookback",		group = grpVar)
-lbType		= input.bool(true,	title = "Fvg",	group = grpVar)
 atrMulti	= input.float(0.25,	title = "ATR Multiplier",	group = grpVar, step  = 0.25)
 
 //  ═════════════════
@@ -340,14 +338,14 @@ if fvgDown
       , bgcolor			= colorShort))
 
 //  ═══  Arrays size  ═══
-if lbType == true
-    if upAry.size() > lb
-        box.delete(upAry.shift())
-    if downAry.size() > lb 
-        box.delete(downAry.shift())
+if upAry.size() > lb
+	box.delete(upAry.shift())
 
-    for [index,bx] in downAry
-        left = bx.get_left()
-        if left < bar_index-lb
-            bx.delete()
-            downAry.remove(index)
+if downAry.size() > lb 
+	box.delete(downAry.shift())
+
+for [index,bx] in downAry
+	left = bx.get_left()
+	if left < bar_index-lb
+		bx.delete()
+		downAry.remove(index)
