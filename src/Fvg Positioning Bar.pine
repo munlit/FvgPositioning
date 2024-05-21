@@ -268,8 +268,8 @@ color colorLyla						= #7E57C2					// Lila
 color colorLightGray				= #787B86					// Gray
 
 
-green =  input.color(#089981, title = "Bullish Color", group = "Style")
-red = input.color(#f23645, title = "Bearish Color", group = "Style")
+colorLong =  input.color(colorBlueSky30, title = "Bullish Color", group = "Style")
+ColorShort = input.color(colorGlobal5ed9920, title = "Bearish Color", group = "Style")
 invis = color.rgb(0,0,0,100)
 
 //  ═════════════════
@@ -314,14 +314,14 @@ var downAry	= array.new_box(na)
 if fvgUp
     upAry.push(
       box.new(bar_index[2], low, bar_index, high[2]
-      , border_color = color.new(green,50)
-      , bgcolor = color.new(green,50)))
+      , border_color	= color.new(colorLong, 50)
+      , bgcolor			= color.new(colorLong, 50)))
 
 if fvgDown
     downAry.push(
       box.new(bar_index[2],  low[2], bar_index, high
-      , border_color = color.new(red,50)
-      , bgcolor = color.new(red,50)))
+      , border_color	= color.new(ColorShort, 50)
+      , bgcolor			= color.new(ColorShort, 50)))
 
 //  ═══  Arrays size  ═══
 if lbType == true
