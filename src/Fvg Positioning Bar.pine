@@ -192,7 +192,7 @@ indicator("FVG Position Bar[@Ultr]", "Fvg Bar[@Ultr]", overlay = true)
 	// LatRedBackground							= rgb(232, 17, 75)						// Latam Red Background
 
 /// ─── Arbe Robotics ───
-ARoPrimary								= #0035FF								// ArbePrimary
+	// ARoPrimary								= #0035FF								// ArbePrimary
 	// ARoPrimaryLight							= #0640FF								// ArbePrimaryLight
 	// ARoSecondary		 	  					= #04EBFF								// ArbeSecondary
 
@@ -211,7 +211,7 @@ ARoPrimary								= #0035FF								// ArbePrimary
 BrLiYel10								= #FBFD73								// BrightLine Yellow
 	// BrLiYel20								= #FFFD52								// BrightLine Yellow Light
 	// BrLiYel30								= #FDF43C								// BrightLineB Yellow High
-	// BrLiYel40								= #FEF301								// BrightLineBackground Yellow Nit
+BrLiYel40								= #FEF301								// BrightLineBackground Yellow Nit
 	// BrLiYel50								= #FFDB00								// BrightLineBackground Yellow Base
 
 /// ─── TradingView ───
@@ -268,23 +268,17 @@ BrLiYel10								= #FBFD73								// BrightLine Yellow
 
 //// ─────────────────────────────────────────────────────────────────────
 
-var grpColor	= " ───Colores ───"
-colFvgPosLong		= input.color(color.new(ARoPrimary, 60),		title = "Compra",	group = grpColor, inline = "aa")
-colFvgPosShort		= input.color(color.new(BrLiYel10, 60),			title = "Venta",	group = grpColor, inline = "aa")
+var grpColor		= "─── Fvg Posisioning ───"
+
+colFvgPosLong		= input.color(color.new(BrLiYel40, 80),			title = "Compra",		inline = "colorFvgPosi")
+colFvgPosShort		= input.color(color.new(BrLiYel10, 70),			title = "Venta",		inline = "colorFvgPosi")
 
 //// ───────────────────────
 /// ─── Fvg Posis ──
 /// ─── Variables ──
 //// ───────────────────────
 
-var grpVar		= " ───Fvg ───"
-sigLength		= input.int(14, 'ADX Suavizado',	group = grpVar)
-diLength		= input.int(14, 'Longitud DI',		group = grpVar)
-levelRange		= input.int(20, 'Rango',			group = grpVar)
-levelTrend		= input.int(35, 'Tendencia',		group = grpVar)
-
-lb				= input.int(50,		title = "FVG Lookback",			group = grpVar)
-vFvgAtrMulti	= input.float(0.25,	title = "Multiplicador ATR",	group = grpVar, step  = 0.25)
+vFvgAtrMulti		= input.float(0.25,	title = " ATR ",			step  = 0.25)
 
 //// ───────────────────────
 /// ─── Fvg Posis ──
@@ -292,32 +286,33 @@ vFvgAtrMulti	= input.float(0.25,	title = "Multiplicador ATR",	group = grpVar, st
 //// ───────────────────────
 
 /// ─── Art ──
-fvgPosAtr		= nz(ta.atr(200)*vFvgAtrMulti, ta.cum(high - low) / (bar_index+1))
+fvgPosAtr			= nz(ta.atr(200)*vFvgAtrMulti, ta.cum(high - low) / (bar_index+1))
 
-/// ─── Fvg detect ──
-fvgDetectUp		= low	> high[2]	and close[1] > high[2]	and (low-high[2]) > fvgPosAtr
-fvgDetectDown	= high	< low[2]	and close[1] < low[2]	and (low[2]-high) > fvgPosAtr
+/// ─── Fvg detect ─
+fvgDetectUp			= low	> high[2]	and close[1] > high[2]	and (low-high[2]) > fvgPosAtr
+fvgDetectDown		= high	< low[2]	and close[1] < low[2]	and (low[2]-high) > fvgPosAtr
 
 /// ─── Highest & Lowest
-hst				= ta.highest(high,5)
-lst				= ta.lowest(low,5)
+fvgPoshst			= ta.highest	(high,	5)
+fvgPoslst			= ta.lowest		(low,	5)
 
 /// ─── Math ───
-var fvgArrUp	= array.new_box(na)
-var fvgArrDown	= array.new_box(na)
+var fvgArrUp		= array.new_box(na)
+var fvgArrDown		= array.new_box(na)
 
 //// ───────────────────────
 /// ─── Fvg Posis ──
 /// ─── Visual ─────
 //// ───────────────────────
 
-/// ─── if ─────
+/// ─── Fvg Up ─────
 if fvgDetectUp
 	fvgArrUp.push(
 	  box.new(bar_index[2], low, bar_index, high[2]
 	  , border_color	= colFvgPosLong
 	  , bgcolor			= colFvgPosLong))
 
+/// ─── Fvg Down ───
 if fvgDetectDown
 	fvgArrDown.push(
 	  box.new(bar_index[2],  low[2], bar_index, high
